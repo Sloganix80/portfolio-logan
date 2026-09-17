@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logan Jacquemin — Photographe passionné</title>
+  <meta name="description" content="Portfolio photo de Logan Jacquemin — Nature, animaux, macro, voitures, aviation et ciel étoilé." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0c0b;
+      --bg-elevated: #111614;
+      --text: #e8e6e1;
+      --text-muted: #a8a8a0;
+      --accent: #3d6b4f;
+      --accent-soft: #2a4a38;
+      --sky: #1a2a3a;
+      --border: rgba(255,255,255,0.08);
+      --radius: 12px;
+      --transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 12, 11, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      padding: 0.9rem 2.5rem;
+      background: rgba(10, 12, 11, 0.92);
+    }
+
+    .logo {
+      font-size: 1.45rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      height: 100vh;
+      min-height: 640px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(to bottom, rgba(10,12,11,0.3) 0%, rgba(10,12,11,0.75) 70%, var(--bg) 100%),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920') center/cover no-repeat;
+      transform: scale(1.05);
+      animation: heroZoom 25s ease-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to { transform: scale(1.12); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.2s 0.3s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
+      line-height: 1.05;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 2.2rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      border-radius: 40px;
+      transition: all 0.35s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 3.5rem;
+      font-weight: 300;
+    }
+
+    /* ===== GALLERY ===== */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.55rem 1.3rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.03em;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .gallery-item .caption {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    /* ===== CIEL SECTION ===== */
+    .ciel-section {
+      position: relative;
+      padding: 8rem 2rem;
+      background: linear-gradient(180deg, var(--bg) 0%, #0a1520 40%, #0d1a2a 100%);
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 230px 80px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 300px 150px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 380px 60px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 450px 180px, #fff, transparent);
+      background-size: 500px 300px;
+      animation: twinkle 8s linear infinite;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    @keyframes twinkle {
+      from { transform: translateY(0); }
+      to { transform: translateY(-300px); }
+    }
+
+    .ciel-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+
+    .ciel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .ciel-item {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ciel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .ciel-item:hover img {
+      transform: scale(1.06);
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--bg-elevated);
+    }
+
+    .about-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-name {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .about-title {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ===== SOCIALS ===== */
+    .socials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .social-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      transition: all 0.35s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .social-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      background: #141a16;
+    }
+
+    .social-card.main {
+      border-color: rgba(61, 107, 79, 0.4);
+    }
+
+    .social-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .social-card .handle {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .social-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.94);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      padding: 1rem;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      opacity: 1;
+    }
+
+    .lightbox-close {
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2.4rem;
+    }
+
+    .lightbox-prev {
+      left: 1rem;
+    }
+
+    .lightbox-next {
+      right: 1rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--bg-elevated);
+        flex-direction: column;
+        padding: 6rem 2.5rem;
+        gap: 1.8rem;
+        transition: right 0.4s ease;
+        border-left: 1px solid var(--border);
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .navbar {
+        padding: 1.1rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 4.5rem 1.2rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+      }
+
+      .gallery-item {
+        aspect-ratio: 3/4;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="#accueil" class="logo">Logan Jacquemin</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#ciel">Ciel & Étoiles</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#reseaux">Réseaux</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="accueil">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Logan Jacquemin</h1>
+      <p class="subtitle">Photographe passionné</p>
+      <p class="tagline">Capturer les instants qui attirent le regard, de la nature au ciel étoilé.</p>
+      <a href="#galerie" class="btn">Découvrir mes photos</a>
+    </div>
+  </header>
+
+  <!-- GALERIE -->
+  <section id="galerie">
+    <div class="container">
+      <h2 class="section-title">Galerie</h2>
+      <p class="section-subtitle">Une sélection de moments capturés au fil de mes découvertes</p>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">Tout</button>
+        <button class="filter-btn" data-filter="nature">Nature</button>
+        <button class="filter-btn" data-filter="animaux">Animaux</button>
+        <button class="filter-btn" data-filter="macro">Macro</button>
+        <button class="filter-btn" data-filter="cars">Voitures</button>
+        <button class="filter-btn" data-filter="aviation">Aviation</button>
+        <button class="filter-btn" data-filter="ciel">Ciel & Étoiles</button>
+        <button class="filter-btn" data-filter="nuit">Nuit</button>
+        <button class="filter-btn" data-filter="autres">Autres</button>
+      </div>
+
+      <div class="gallery-grid" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- CIEL & ÉTOILES -->
+  <section class="ciel-section" id="ciel">
+    <div class="stars"></div>
+    <div class="ciel-content">
+      <h2 class="section-title">Ciel & Étoiles</h2>
+      <p class="section-subtitle">L’immensité du ciel nocturne, un univers à part</p>
+    </div>
+    <div class="ciel-grid" id="cielGrid"></div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="about" id="apropos">
+    <div class="container">
+      <div class="about-content">
+        <h2 class="section-title">À propos</h2>
+        <p>
+          Je suis Logan Jacquemin, photographe passionné.
+        </p>
+        <p>
+          Je photographie avant tout par plaisir et par curiosité, en capturant les sujets qui attirent mon regard, de la nature aux animaux, en passant par les voitures, les avions, la macro ou encore les paysages étoilés.
+        </p>
+        <p>
+          Chaque photo est pour moi une manière de garder une trace d’un instant, d’un détail ou simplement d’une scène que j’ai trouvée intéressante.
+        </p>
+        <p>
+          Je partage ici une sélection de mes clichés, au fil de mes découvertes et de mes envies.
+        </p>
+        <div class="about-name">Logan Jacquemin</div>
+        <div class="about-title">Photographe passionné</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSEAUX -->
+  <section id="reseaux">
+    <div class="container">
+      <h2 class="section-title">Mes univers</h2>
+      <p class="section-subtitle">Retrouvez-moi sur Instagram</p>
+
+      <div class="socials-grid">
+        <a href="https://instagram.com/loganshot.80" target="_blank" rel="noopener" class="social-card main">
+          <h3>Compte principal</h3>
+          <span class="handle">@loganshot.80</span>
+          <p>Nature, paysages, macro, ciel… tout ce qui attire mon regard.</p>
+        </a>
+        <a href="https://instagram.com/loganshot.cars" target="_blank" rel="noopener" class="social-card">
+          <h3>Voitures</h3>
+          <span class="handle">@loganshot.cars</span>
+          <p>Automobile, détails et esthétique mécanique.</p>
+        </a>
+        <a href="https://instagram.com/loganshot.portraits" target="_blank" rel="noopener" class="social-card">
+          <h3>Portraits</h3>
+          <span class="handle">@loganshot.portraits</span>
+          <p>Portraits et photographie de personnes.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© <span id="year"></span> Logan Jacquemin — Photographe passionné</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">×</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Précédent">‹</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button class="lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
+  </div>
+
+  <script>
+    // =====================================================
+    //  CONFIGURATION DES PHOTOS
+    //  Remplace simplement les URLs par tes propres chemins
+    //  Exemple : "images/nature/photo1.jpg"
+    // =====================================================
+    const photos = {
+  nature: [
+    { src: "images/nature/photo1.jpg", title: "Nature 1" },
+    { src: "images/nature/photo2.jpg", title: "Nature 2" },
+    { src: "images/nature/photo3.jpg", title: "Nature 3" }
+  ],
+  animaux: [
+    { src: "images/animaux/photo1.jpg", title: "Animal 1" },
+    { src: "images/animaux/photo2.jpg", title: "Animal 2" },
+    { src: "images/animaux/photo3.jpg", title: "Animal 3" },
+    { src: "images/animaux/photo4.jpg", title: "Animal 4" },
+    { src: "images/animaux/photo5.jpg", title: "Animal 5" },
+    { src: "images/animaux/photo6.jpg", title: "Animal 6" }
+  ],
+  macro: [
+    { src: "images/macro/photo1.jpg", title: "Macro 1" }
+  ],
+  cars: [
+    { src: "images/cars/photo1.jpg", title: "Voiture 1" },
+    { src: "images/cars/photo2.jpg", title: "Voiture 2" },
+    { src: "images/cars/photo3.jpg", title: "Voiture 3" },
+    { src: "images/cars/photo4.jpg", title: "Voiture 4" },
+    { src: "images/cars/photo5.jpg", title: "Voiture 5" },
+    { src: "images/cars/photo6.jpg", title: "Voiture 6" }
+  ],
+  aviation: [
+    { src: "images/aviation/photo1.jpg", title: "Aviation 1" }
+  ],
+  ciel: [
+    { src: "images/ciel/photo1.jpg", title: "Ciel étoilé 1" }
+  ],
+  nuit: [
+    { src: "images/nuit/photo1.jpg", title: "Nuit 1" }
+  ],
+  autres: [
+    { src: "images/autres/photo1.jpg", title: "Autre 1" },
+    { src: "images/autres/photo2.jpg", title: "Autre 2" }
+  ]
+};
+
+    // =====================================================
+    //  GÉNÉRATION DE LA GALERIE
+    // =====================================================
+    const gallery = document.getElementById('gallery');
+    const cielGrid = document.getElementById('cielGrid');
+    let allItems = [];
+    let currentIndex = 0;
+
+    function createGallery() {
+      // Galerie principale
+      Object.keys(photos).forEach(category => {
+        photos[category].forEach((photo, i) => {
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.dataset.category = category;
+          item.innerHTML = `
+            <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+            <div class="overlay"><span class="caption">${photo.title}</span></div>
+          `;
+          item.addEventListener('click', () => openLightbox(allItems.indexOf(item)));
+          gallery.appendChild(item);
+          allItems.push(item);
+        });
+      });
+
+      // Section Ciel spéciale (uniquement les photos ciel)
+      photos.ciel.forEach((photo, i) => {
+        const item = document.createElement('div');
+        item.className = 'ciel-item';
+        item.innerHTML = `<img src="${photo.src}" alt="${photo.title}" loading="lazy">`;
+        item.addEventListener('click', () => {
+          // Trouver l'index dans allItems pour le lightbox
+          const idx = allItems.findIndex(el => el.dataset.category === 'ciel' && el.querySelector('img').src === photo.src);
+          openLightbox(idx >= 0 ? idx : 0);
+        });
+        cielGrid.appendChild(item);
+      });
+
+      // Observer pour animation d'apparition
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.gallery-item').forEach(el => observer.observe(el));
+    }
+
+    // =====================================================
+    //  FILTRES
+    // =====================================================
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+            setTimeout(() => item.classList.add('visible'), 50);
+          } else {
+            item.classList.remove('visible');
+            setTimeout(() => item.style.display = 'none', 400);
+          }
+        });
+      });
+    });
+
+    // =====================================================
+    //  LIGHTBOX
+    // =====================================================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = allItems[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % allItems.length;
+      const img = allItems[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+      const img = allItems[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxNext').addEventListener('click', showNext);
+    document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // =====================================================
+    //  NAVBAR + MENU MOBILE
+    // =====================================================
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Année footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Init
+    createGallery();
+  </script>
+</body>
+</html>
